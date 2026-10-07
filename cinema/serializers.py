@@ -47,14 +47,14 @@ class MovieSerializer(serializers.Serializer):
         queryset=Genre.objects.all()
     )
 
-    def create(self, validated_data): 
+    def create(self, validated_data):
         actors = validated_data.pop("actors", [])
         genres = validated_data.pop("genres", [])
         movie = Movie.objects.create(**validated_data)
         movie.actors.set(actors)
         movie.genres.set(genres)
         return movie
-    
+
     def update(self, instance, validated_data):
         actors = validated_data.pop("actors", None)
         genres = validated_data.pop("genres", None)
